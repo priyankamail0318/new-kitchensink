@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: newkitchensink
+server:
+  servlet:
+    context-path: /newkitchensink/

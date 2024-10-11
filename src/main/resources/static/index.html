@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Sink Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Welcome to Spring Boot!</h1>
+    <div>
+        <p>You have successfully deployed a Spring Boot application.</p>
+    </div>
+
+    <h2>Member Registration</h2>
+    <form action="/newkitchensink/register" method="post" id="reg">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Phone #:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+
+    <h2>Members</h2>
+    <div id="membersContainer">
+        <em>No registered members.</em>
+    </div>
+    <table class="table" id="membersTable">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone #</th>
+        </tr>
+        </thead>
+        <tbody id="membersBody">
+        <!-- Dynamic member rows will be injected here -->
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    // Fetch members from the backend
+    function fetchMembers() {
+        fetch('/newkitchensink/getAllmembers')
+            .then(response => response.json())
+            .then(members => {
+                const membersBody = document.getElementById('membersBody');
+                membersBody.innerHTML = ''; // Clear existing rows
+
+                if (members.length === 0) {
+                    document.getElementById('membersContainer').innerHTML = '<em>No registered members.</em>';
+                    document.getElementById('membersTable').style.display = 'none';
+                } else {
+                    members.forEach(member => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${member.id}</td>
+                            <td>${member.name}</td>
+                            <td>${member.email}</td>
+                            <td>${member.phoneNumber}</td>
+                        `;
+                        membersBody.appendChild(row);
+                    });
+                    document.getElementById('membersTable').style.display = '';
+                }
+            })
+            .catch(error => console.error('Error fetching members:', error));
+    }
+
+    // Fetch members on page load
+    document.addEventListener("DOMContentLoaded", fetchMembers);
+</script>
+
+</body>
+
+</html>
