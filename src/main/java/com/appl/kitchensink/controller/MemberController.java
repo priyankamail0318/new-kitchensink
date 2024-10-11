@@ -4,14 +4,16 @@ import com.appl.kitchensink.model.Member;
 import com.appl.kitchensink.repository.MemberRepository;
 import com.appl.kitchensink.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -40,7 +42,7 @@ public class MemberController {
 
     @GetMapping("/getAllmembers")
     public ResponseEntity<List<Member>> listAllMembers() {
-        List<Member> members = memberService.findAllMembers();
+        List<Member> members = memberService.getAllMembers();
         return ResponseEntity.ok(members);
     }
 
@@ -51,7 +53,7 @@ public class MemberController {
             return null;
         }
 
-        memberService.registerMember(member.getName(), member.getEmail(), member.getPhoneNumber());
+        memberService.registerMember(member);
 
         return "Member Registered Successfully!";
     }

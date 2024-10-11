@@ -1,10 +1,8 @@
 package com.appl.kitchensink.repository;
 
 import com.appl.kitchensink.model.Member;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-@Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends MongoRepository<Member, String> {
     Member findByEmail(String email);
 }

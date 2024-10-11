@@ -81,7 +81,6 @@
     <table class="table table-striped" id="membersTable" style="display: none;">
         <thead>
         <tr>
-            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone #</th>
@@ -111,7 +110,6 @@
                     members.forEach(member => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td>${member.id}</td>
                             <td>${member.name}</td>
                             <td>${member.email}</td>
                             <td>${member.phoneNumber}</td>
