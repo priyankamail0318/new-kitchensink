@@ -88,7 +88,6 @@
         </tr>
         </thead>
         <tbody id="membersBody">
-        <!-- Dynamic member rows will be injected here -->
         </tbody>
     </table>
 </div>
@@ -97,7 +96,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
-    // Fetch members from the backend
+
     function fetchMembers() {
         fetch('/newkitchensink/getAllmembers')
             .then(response => response.json())
@@ -125,7 +124,6 @@
             .catch(error => console.error('Error fetching members:', error));
     }
 
-    // Fetch members on page load
     document.addEventListener("DOMContentLoaded", fetchMembers);
 </script>
 

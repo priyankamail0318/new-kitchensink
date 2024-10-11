@@ -30,7 +30,6 @@ public class MemberController {
     @Autowired
     private MemberRepository memberRepository;
 
-    // Display the registration form
     @GetMapping("/")
     public String showRegistrationForm(Model model) {
         model.addAttribute("newMember", new Member());
@@ -49,7 +48,7 @@ public class MemberController {
     public String registerMember(@ModelAttribute Member member, BindingResult result) {
         log.info("Inside controller Method ...");
         if (result.hasErrors()) {
-            return null; // Handle the error appropriately
+            return null;
         }
 
         memberService.registerMember(member.getName(), member.getEmail(), member.getPhoneNumber());

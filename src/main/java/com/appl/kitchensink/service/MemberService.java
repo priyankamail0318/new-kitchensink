@@ -15,7 +15,6 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    // Register a new member
     public Member registerMember(String name, String email, String phoneNumber) {
         log.info("Member Service Method Called...");
         Member newMember = new Member();
