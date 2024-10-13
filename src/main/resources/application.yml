@@ -12,3 +12,26 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     instance:
       prefer-ip: true
+
+logging:
+  level:
+    root: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,info,circuitbreakers'
+
+resilience4j:
+  retry:
+    instances:
+      myService:
+        maxAttempts: 3          # Number of retry attempts
+        waitDuration: 1000ms    # Delay between attempts
+
+  circuitbreaker:
+    instances:
+      myService:
+        slidingWindowSize: 5    # Number of calls to consider for failure rate
+        failureRateThreshold: 50 # Percentage of failures to trigger circuit breaker

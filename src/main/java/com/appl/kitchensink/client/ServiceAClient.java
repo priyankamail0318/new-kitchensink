@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface ServiceAClient {
 
     @GetMapping("/greet")
-    String greet();
+    String callExternalService();
 }
 

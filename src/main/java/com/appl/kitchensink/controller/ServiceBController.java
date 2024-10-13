@@ -13,7 +13,7 @@ public class ServiceBController {
 
     @GetMapping("/call-service-a")
     public String callServiceA() {
-        return serviceAClient.greet();
+        return serviceAClient.callExternalService();
     }
 }
 
