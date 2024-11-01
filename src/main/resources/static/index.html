@@ -61,17 +61,19 @@
     <form action="/newkitchensink/register" method="post" id="reg">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" class="form-control" required>
+            <input type="text" id="name" name="name" class="form-control" required pattern="[^0-9]*" title="Must not contain numbers" autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
+            <input type="email" id="email" name="email" class="form-control" required  autocomplete="off">
         </div>
 
         <div class="form-group">
             <label for="phoneNumber">Phone #:</label>
-            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" required
+                   autocomplete="off" minlength="10" maxlength="12"
+                   pattern="\d{10,12}" title="Phone number must be between 10 and 12 digits">
         </div>
 
         <button type="submit" class="btn btn-primary btn-block">Register</button>
@@ -81,14 +83,17 @@
     <table class="table table-striped" id="membersTable" style="display: none;">
         <thead>
         <tr>
+            <th scope="col">Id</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Phone #</th>
+            <th scope="col">REST URL</th>
         </tr>
         </thead>
         <tbody id="membersBody">
         </tbody>
     </table>
+    REST URL for all members: <a href="/newkitchensink/getAllmembers">/newkitchensink/members</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -110,9 +115,11 @@
                     members.forEach(member => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
+                            <td>${member.id}</td>
                             <td>${member.name}</td>
                             <td>${member.email}</td>
                             <td>${member.phoneNumber}</td>
+                            <td><a href="/newkitchensink/member/${member.id}">/newkitchensink/member/${member.id}</a></td>
                         `;
                         membersBody.appendChild(row);
                     });
